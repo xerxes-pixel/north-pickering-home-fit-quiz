@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What North Pickering Home Fits You? | Team Rajpal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -294,16 +296,25 @@
 <script>
 const questions = [
   {
-    q: "Who's this home for?",
+    q: "First things first \u2014 are you looking at brand-new construction, or resale?",
     opts: [
-      { text: "Just the two of us", scores: {S:2, T:1} },
-      { text: "A growing family", scores: {D:2, S:1} },
-      { text: "Multi-generational, extended family under one roof", scores: {D:3} },
-      { text: "It's purely an investment, I won't live there", scores: {I:3} }
+      { text: "Brand-new construction (pre-construction)" },
+      { text: "Resale \u2014 an existing home" },
+      { text: "Not sure yet, show me both" }
     ]
   },
   {
-    q: "What's your comfortable budget range?",
+    q: "Who's this home for?",
+    opts: [
+      { text: "Just the two of us" },
+      { text: "A growing family" },
+      { text: "Multi-generational, extended family under one roof" },
+      { text: "It's purely an investment, I won't live there" }
+    ]
+  },
+  {
+    q: "What's your comfortable budget for a new build?",
+    showIf: { questionIndex: 0, optionIndexIn: [0, 2] },
     opts: [
       { text: "$600K to $700K", resultKey: "A" },
       { text: "$700K to $800K", resultKey: "B" },
@@ -313,30 +324,44 @@ const questions = [
     ]
   },
   {
-    q: "How do you get to work most days?",
+    q: "What's your comfortable budget?",
+    showIf: { questionIndex: 0, optionIndexIn: [1] },
     opts: [
-      { text: "GO train or a regular commute into Toronto", scores: {T:2, S:1} },
-      { text: "Mostly local, occasional trips into the city", scores: {S:2, D:1} },
-      { text: "I work from home or locally, full time", scores: {D:2} },
-      { text: "Not applicable, this isn't where I'll live", scores: {I:3} }
+      { text: "Under $700K" },
+      { text: "$700K to $850K" },
+      { text: "$850K to $1M" },
+      { text: "$1M to $1.2M" },
+      { text: "$1.2M+" }
     ]
   },
   {
-    q: "How important is a backyard?",
+    q: "What kind of home are you picturing?",
+    showIf: { questionIndex: 0, optionIndexIn: [1] },
     opts: [
-      { text: "Must have real yard space", scores: {D:3} },
-      { text: "A modest yard is fine, I'd rather have more house", scores: {S:2, T:1} },
-      { text: "Doesn't matter much to me", scores: {T:2, I:1} },
-      { text: "Not applicable", scores: {I:3} }
+      { text: "A townhouse", resultKey: "RT" },
+      { text: "A semi-detached", resultKey: "RS" },
+      { text: "A detached home", resultKey: "RD" },
+      { text: "Open to anything that fits the budget", resultKey: "RO" }
+    ]
+  },
+  {
+    q: "Anywhere in Seaton you're drawn to?",
+    opts: [
+      { text: "Mount Pleasant \u2014 west side, near Whitevale and the creek" },
+      { text: "Thompson's Corners \u2014 northeast, closest to Hwy 7 and the 407" },
+      { text: "Wilson Meadows \u2014 centre-east, near the future rec complex and Dave Ryan park" },
+      { text: "Brock-Taunton \u2014 east side, along Brock Road" },
+      { text: "Lamoreaux \u2014 south of Taunton, near the new schools" },
+      { text: "No preference, I just want to be in Seaton" }
     ]
   },
   {
     q: "What's your timeline?",
     opts: [
-      { text: "Ready to move within the year", scores: {T:1, S:1} },
-      { text: "Comfortable waiting until 2027 for a pre-con build", scores: {S:2, D:2} },
-      { text: "This is a five-plus year investment play", scores: {I:3} },
-      { text: "Just exploring my options for now", scores: {T:1} }
+      { text: "Ready to move within the year" },
+      { text: "Comfortable waiting until 2027 for a pre-con build" },
+      { text: "This is a five-plus year investment play" },
+      { text: "Just exploring my options for now" }
     ]
   },
   {
@@ -350,7 +375,7 @@ const questions = [
     q: "How much are you pre-approved for?",
     type: "text",
     placeholder: "e.g. $750,000",
-    showIf: { questionIndex: 5, optionIndex: 0 }
+    showIf: { questionIndex: 7, optionIndex: 0 }
   },
   {
     q: "Are you signed up or working with an agent?",
@@ -362,6 +387,34 @@ const questions = [
 ];
 
 const results = {
+  RT: {
+    tag: "Resale townhouse",
+    title: "Move-in ready, and you'll know exactly what you're buying.",
+    body: "With resale you walk the actual home before you commit \u2014 the finishes, the light, the neighbours, the real lot. Townhouses in and around Seaton range from freehold to condo-fee, and that distinction changes your monthly costs, so it's the first thing we check on any listing you like.",
+    note: "We'll send you what's active now plus what's recently sold, so you can see what your budget is really buying today rather than what a price list says.",
+    icon: iconTown
+  },
+  RS: {
+    tag: "Resale semi-detached",
+    title: "One shared wall, and a home you can walk through first.",
+    body: "Semis give you meaningfully more space and privacy than a townhouse without a detached price tag, and buying resale means no assignment risk, no closing-date surprises, and a lot you can actually stand on before you sign.",
+    note: "We'll pull active semis in your range and the recent solds behind them, so the price conversation starts with evidence.",
+    icon: iconSemi
+  },
+  RD: {
+    tag: "Resale detached",
+    title: "Full privacy, real yard, no waiting on a build.",
+    body: "Detached resale gets you the lot and the privacy without a two-year timeline. In an established pocket you also get mature trees, finished landscaping, and a street that already exists \u2014 things a new subdivision takes years to grow into.",
+    note: "Detached is where the spread between a good buy and an overpriced one is widest, which is exactly where having the sold data matters most.",
+    icon: iconDetached
+  },
+  RO: {
+    tag: "Resale \u2014 open to the right home",
+    title: "Let's let the market decide.",
+    body: "Staying flexible on home type is often the smartest way to buy resale. The same budget can reach a detached home on a quiet street or a larger townhouse in a newer pocket, and which one is the better buy changes month to month.",
+    note: "Tell us your must-haves and we'll bring you everything that fits across all product types, with the solds behind each one.",
+    icon: iconInvestor
+  },
   A: {
     tag: "3-storey townhouse",
     title: "Smart entry point, serious upside.",
@@ -430,7 +483,9 @@ function pad(n){ return n < 10 ? '0'+n : ''+n; }
 function shouldShowQuestion(idx){
   const q = questions[idx];
   if(!q.showIf) return true;
-  return answers[q.showIf.questionIndex] === q.showIf.optionIndex;
+  const a = answers[q.showIf.questionIndex];
+  if(Array.isArray(q.showIf.optionIndexIn)) return q.showIf.optionIndexIn.indexOf(a) !== -1;
+  return a === q.showIf.optionIndex;
 }
 
 function visibleIndices(){
@@ -507,20 +562,31 @@ function renderQuestion(){
   nextBtn.textContent = nextVisibleIndex(current) >= questions.length ? 'See my result' : 'Next';
 }
 
+function isResale(){ return answers[0] === 1; }
 function tally(){
-  const budgetAnswerIdx = answers[1];
-  return questions[1].opts[budgetAnswerIdx].resultKey;
+  if(isResale()){
+    const t = answers[4];
+    return t !== null ? questions[4].opts[t].resultKey : "RO";
+  }
+  const b = answers[2];
+  return b !== null ? questions[2].opts[b].resultKey : "A";
 }
 
 function renderResult(){
   const key = tally();
   const r = results[key];
-  let html = '<div class="result-tag">Your match</div>';
+  let html = '<div class="result-tag">' + (isResale() ? 'Resale' : (answers[0] === 2 ? 'New build (and worth comparing to resale)' : 'New construction')) + '</div>';
   html += '<div class="result-head"><div class="result-icon">' + r.icon() + '</div><h2 class="result-title">' + r.title + '</h2></div>';
   html += '<p class="result-body">' + r.body + '</p>';
   html += '<p class="result-note">' + r.note + '</p>';
-  const subject = encodeURIComponent("My North Pickering home match: " + r.tag);
-  let bodyText = "Hi " + agentName + ",\n\nI just took the Team Rajpal home-fit quiz and matched with: " + r.tag + ".\n\nHere are my answers:\n\n";
+  if(answers[0] === 2){
+    html += '<p class="result-note">You said you were open to both. The short version: new construction lets you pick finishes and close later, but you buy from a floor plan. Resale lets you walk the home and move sooner, but you take it as it is. We are happy to run both side by side for you.</p>';
+  }
+  if(answers[5] !== null && answers[5] !== 5){
+    html += '<p class="result-note">Noted on ' + questions[5].opts[answers[5]].text.split(' \u2014 ')[0] + '. We will focus there first and flag anything nearby worth a look.</p>';
+  }
+  const subject = encodeURIComponent("North Pickering enquiry: " + r.tag);
+  let bodyText = "Hi " + agentName + ",\n\nI just took the Team Rajpal Seaton quiz. I'm looking at " + (isResale() ? "resale" : (answers[0] === 2 ? "both new and resale" : "new construction")) + ", and matched with: " + r.tag + ".\n\nHere are my answers:\n\n";
   const vis = visibleIndices();
   vis.forEach((qi, i) => {
     const item = questions[qi];
@@ -537,6 +603,7 @@ function renderResult(){
   const body = encodeURIComponent(bodyText);
   html += '<div class="cta-row">';
   html += '<a class="btn" style="text-decoration:none;display:inline-block;" href="mailto:' + encodeURIComponent(agentEmail) + '?subject=' + subject + '&body=' + body + '">Email me my match</a>';
+  html += '<a class="btn btn-ghost" style="text-decoration:none;display:inline-block;" href="https://xerxes-pixel.github.io/north-pickering-growth-map/map.html">Explore the growth map</a>';
   html += '<button class="btn btn-ghost" id="restartBtn">Retake quiz</button>';
   html += '</div>';
   questionArea.innerHTML = html;
