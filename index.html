@@ -6,26 +6,26 @@
 <title>What North Pickering Home Fits You? | Team Rajpal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#16232E;
-    --ink-soft:#2C3E4C;
-    --paper:#F6F4EE;
-    --card:#FCFBF8;
-    --grid-line:#D8DED2;
-    --sage:#7C9473;
-    --sage-dark:#4E6146;
-    --brass:#B9832E;
-    --brass-dark:#8A611E;
-    --slate:#5B6B76;
-    --hairline:#CBD1C6;
+    --ink:#08172F;
+    --ink-soft:#294B7A;
+    --paper:#EEF1F4;
+    --card:#FFFFFF;
+    --grid-line:#D8DDE3;
+    --sage:#004D9A;
+    --sage-dark:#00376E;
+    --brass:#DC1C2E;
+    --brass-dark:#A8121F;
+    --slate:#55606B;
+    --hairline:#C7CCD3;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     background:var(--paper);
-    font-family:'Inter',sans-serif;
+    font-family:Calibri,'Segoe UI',Optima,Arial,sans-serif;
     color:var(--ink);
     min-height:100vh;
     background-image:
@@ -57,7 +57,7 @@
     display:inline-block;
   }
   h1{
-    font-family:'Fraunces',serif;
+    font-family:Cambria,Georgia,'Times New Roman',serif;
     font-weight:500;
     font-size:clamp(28px,5vw,40px);
     line-height:1.15;
@@ -121,7 +121,7 @@
     letter-spacing:0.04em;
   }
   .q-text{
-    font-family:'Fraunces',serif;
+    font-family:Cambria,Georgia,'Times New Roman',serif;
     font-weight:500;
     font-size:22px;
     line-height:1.35;
@@ -139,7 +139,7 @@
     border:1px solid var(--hairline);
     border-radius:2px;
     padding:15px 18px;
-    font-family:'Inter',sans-serif;
+    font-family:Calibri,'Segoe UI',Optima,Arial,sans-serif;
     font-size:15px;
     color:var(--ink-soft);
     cursor:pointer;
@@ -150,7 +150,7 @@
   }
   .opt:hover{
     border-color:var(--sage);
-    background:#F0F3EC;
+    background:#E7EEF6;
   }
   .opt:active{ transform:scale(0.995); }
   .opt-mark{
@@ -164,7 +164,7 @@
   }
   .opt.selected{
     border-color:var(--brass);
-    background:#FBF3E4;
+    background:#FFE3E6;
   }
   .opt.selected .opt-mark{
     border-color:var(--brass);
@@ -192,7 +192,7 @@
   }
   .btn:hover{ background:var(--ink-soft); }
   .btn:disabled{
-    background:#C9CDC7;
+    background:#C7CCD3;
     cursor:not-allowed;
   }
   .btn-ghost{
@@ -200,11 +200,11 @@
     color:var(--slate);
     border:1px solid var(--hairline);
   }
-  .btn-ghost:hover{ background:#EFEEE8; color:var(--ink); }
+  .btn-ghost:hover{ background:#E4E8ED; color:var(--ink); }
   .error-msg{
     font-family:'IBM Plex Mono',monospace;
     font-size:12px;
-    color:#A33A2D;
+    color:#DC1C2E;
     margin-top:14px;
     display:none;
   }
@@ -227,7 +227,7 @@
     margin-bottom:6px;
   }
   .result-title{
-    font-family:'Fraunces',serif;
+    font-family:Cambria,Georgia,'Times New Roman',serif;
     font-weight:500;
     font-size:26px;
     margin:0;
@@ -269,6 +269,7 @@
 </head>
 <body>
 <div class="wrap">
+  <img src="tr-logo.png" alt="Team Rajpal — World Class Service, World Class Results" style="width:96px;height:auto;display:block;margin:0 0 18px;">
   <div class="eyebrow">Team Rajpal — North Pickering</div>
   <h1>What North Pickering home fits you?</h1>
   <p class="sub">Six quick questions on how you live, what you need, and where you're headed. We'll match you to a home type and a straight-talk read on where to look.</p>
@@ -287,7 +288,7 @@
     </div>
   </div>
 
-  <div class="brand-foot">Team Rajpal · Seaton, Pickering, Ontario</div>
+  <div class="brand-foot">World Class Service · World Class Results<br>Team Rajpal · Re/Max Key2 Real Estate, Brokerage · Seaton, Pickering, Ontario</div>
 </div>
 
 <script>
@@ -399,16 +400,16 @@ const results = {
 };
 
 function iconDetached(){
-  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="30" width="44" height="26" stroke="#16232E" stroke-width="1.5"/><path d="M6 30L32 12L58 30" stroke="#B9832E" stroke-width="1.5" fill="none"/><rect x="28" y="40" width="8" height="16" stroke="#16232E" stroke-width="1.5"/><rect x="16" y="36" width="7" height="7" stroke="#16232E" stroke-width="1.2"/><rect x="41" y="36" width="7" height="7" stroke="#16232E" stroke-width="1.2"/></svg>';
+  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="30" width="44" height="26" stroke="#08172F" stroke-width="1.5"/><path d="M6 30L32 12L58 30" stroke="#DC1C2E" stroke-width="1.5" fill="none"/><rect x="28" y="40" width="8" height="16" stroke="#08172F" stroke-width="1.5"/><rect x="16" y="36" width="7" height="7" stroke="#08172F" stroke-width="1.2"/><rect x="41" y="36" width="7" height="7" stroke="#08172F" stroke-width="1.2"/></svg>';
 }
 function iconSemi(){
-  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="30" width="26" height="26" stroke="#16232E" stroke-width="1.5"/><rect x="32" y="30" width="26" height="26" stroke="#16232E" stroke-width="1.5"/><path d="M2 30L19 16L36 30" stroke="#B9832E" stroke-width="1.5" fill="none"/><path d="M28 30L45 16L62 30" stroke="#B9832E" stroke-width="1.5" fill="none"/><rect x="14" y="42" width="6" height="14" stroke="#16232E" stroke-width="1.2"/><rect x="44" y="42" width="6" height="14" stroke="#16232E" stroke-width="1.2"/></svg>';
+  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="30" width="26" height="26" stroke="#08172F" stroke-width="1.5"/><rect x="32" y="30" width="26" height="26" stroke="#08172F" stroke-width="1.5"/><path d="M2 30L19 16L36 30" stroke="#DC1C2E" stroke-width="1.5" fill="none"/><path d="M28 30L45 16L62 30" stroke="#DC1C2E" stroke-width="1.5" fill="none"/><rect x="14" y="42" width="6" height="14" stroke="#08172F" stroke-width="1.2"/><rect x="44" y="42" width="6" height="14" stroke="#08172F" stroke-width="1.2"/></svg>';
 }
 function iconTown(){
-  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="30" width="18" height="26" stroke="#16232E" stroke-width="1.5"/><rect x="23" y="30" width="18" height="26" stroke="#16232E" stroke-width="1.5"/><rect x="42" y="30" width="18" height="26" stroke="#16232E" stroke-width="1.5"/><path d="M0 30L13 18L26 30" stroke="#B9832E" stroke-width="1.4" fill="none"/><path d="M19 30L32 18L45 30" stroke="#B9832E" stroke-width="1.4" fill="none"/><path d="M38 30L51 18L64 30" stroke="#B9832E" stroke-width="1.4" fill="none"/></svg>';
+  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="30" width="18" height="26" stroke="#08172F" stroke-width="1.5"/><rect x="23" y="30" width="18" height="26" stroke="#08172F" stroke-width="1.5"/><rect x="42" y="30" width="18" height="26" stroke="#08172F" stroke-width="1.5"/><path d="M0 30L13 18L26 30" stroke="#DC1C2E" stroke-width="1.4" fill="none"/><path d="M19 30L32 18L45 30" stroke="#DC1C2E" stroke-width="1.4" fill="none"/><path d="M38 30L51 18L64 30" stroke="#DC1C2E" stroke-width="1.4" fill="none"/></svg>';
 }
 function iconInvestor(){
-  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 48L22 34L32 42L56 16" stroke="#B9832E" stroke-width="2" fill="none"/><path d="M44 16H56V28" stroke="#B9832E" stroke-width="2" fill="none"/><line x1="8" y1="54" x2="58" y2="54" stroke="#16232E" stroke-width="1.5"/></svg>';
+  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 48L22 34L32 42L56 16" stroke="#DC1C2E" stroke-width="2" fill="none"/><path d="M44 16H56V28" stroke="#DC1C2E" stroke-width="2" fill="none"/><line x1="8" y1="54" x2="58" y2="54" stroke="#08172F" stroke-width="1.5"/></svg>';
 }
 
 let current = 0;
