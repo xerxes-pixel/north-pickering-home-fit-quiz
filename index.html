@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What North Pickering Home Fits You? | Team Rajpal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16232E;
+    --ink-soft:#2C3E4C;
+    --paper:#F6F4EE;
+    --card:#FCFBF8;
+    --grid-line:#D8DED2;
+    --sage:#7C9473;
+    --sage-dark:#4E6146;
+    --brass:#B9832E;
+    --brass-dark:#8A611E;
+    --slate:#5B6B76;
+    --hairline:#CBD1C6;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size:28px 28px;
+  }
+  .wrap{
+    max-width:680px;
+    margin:0 auto;
+    padding:48px 20px 80px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--sage-dark);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;
+    height:1px;
+    background:var(--sage-dark);
+    display:inline-block;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(28px,5vw,40px);
+    line-height:1.15;
+    margin:0 0 12px;
+    letter-spacing:-0.01em;
+  }
+  .sub{
+    font-size:16px;
+    color:var(--slate);
+    line-height:1.6;
+    margin:0 0 40px;
+    max-width:52ch;
+  }
+  .plot{
+    background:var(--card);
+    border:1px solid var(--hairline);
+    border-radius:2px;
+    padding:36px 32px;
+    position:relative;
+  }
+  .plot::before{
+    content:"";
+    position:absolute;
+    top:12px; left:12px; right:12px; bottom:12px;
+    border:1px dashed var(--hairline);
+    pointer-events:none;
+  }
+  .progress-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:28px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--slate);
+  }
+  .progress-track{
+    flex:1;
+    height:1px;
+    background:var(--hairline);
+    margin:0 16px;
+    position:relative;
+  }
+  .progress-fill{
+    position:absolute;
+    top:-3px; left:0;
+    height:7px;
+    display:flex;
+    gap:3px;
+  }
+  .tick{
+    width:5px; height:7px;
+    background:var(--brass);
+    transition:opacity .25s ease;
+  }
+  .q-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--brass-dark);
+    margin-bottom:10px;
+    letter-spacing:0.04em;
+  }
+  .q-text{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:22px;
+    line-height:1.35;
+    margin:0 0 26px;
+    color:var(--ink);
+  }
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .opt{
+    text-align:left;
+    background:transparent;
+    border:1px solid var(--hairline);
+    border-radius:2px;
+    padding:15px 18px;
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    transition:border-color .15s ease, background .15s ease, transform .1s ease;
+  }
+  .opt:hover{
+    border-color:var(--sage);
+    background:#F0F3EC;
+  }
+  .opt:active{ transform:scale(0.995); }
+  .opt-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--slate);
+    border:1px solid var(--hairline);
+    width:20px; height:20px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .opt.selected{
+    border-color:var(--brass);
+    background:#FBF3E4;
+  }
+  .opt.selected .opt-mark{
+    border-color:var(--brass);
+    background:var(--brass);
+    color:#fff;
+  }
+  .foot-nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:30px;
+  }
+  .btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    background:var(--ink);
+    color:#fff;
+    border:none;
+    padding:12px 22px;
+    cursor:pointer;
+    border-radius:2px;
+    transition:background .15s ease;
+  }
+  .btn:hover{ background:var(--ink-soft); }
+  .btn:disabled{
+    background:#C9CDC7;
+    cursor:not-allowed;
+  }
+  .btn-ghost{
+    background:transparent;
+    color:var(--slate);
+    border:1px solid var(--hairline);
+  }
+  .btn-ghost:hover{ background:#EFEEE8; color:var(--ink); }
+  .error-msg{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:#A33A2D;
+    margin-top:14px;
+    display:none;
+  }
+  .result-head{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:22px;
+  }
+  .result-icon{
+    width:64px; height:64px;
+    flex-shrink:0;
+  }
+  .result-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--sage-dark);
+    margin-bottom:6px;
+  }
+  .result-title{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:26px;
+    margin:0;
+    line-height:1.2;
+  }
+  .result-body{
+    font-size:16px;
+    line-height:1.7;
+    color:var(--ink-soft);
+    margin:0 0 18px;
+  }
+  .result-note{
+    font-size:14px;
+    line-height:1.7;
+    color:var(--slate);
+    border-left:2px solid var(--sage);
+    padding:2px 0 2px 16px;
+    margin:0 0 28px;
+  }
+  .cta-row{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .brand-foot{
+    text-align:center;
+    margin-top:36px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--slate);
+  }
+  @media (max-width:480px){
+    .plot{ padding:26px 20px; }
+    .q-text{ font-size:19px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Team Rajpal — North Pickering</div>
+  <h1>What North Pickering home fits you?</h1>
+  <p class="sub">Six quick questions on how you live, what you need, and where you're headed. We'll match you to a home type and a straight-talk read on where to look.</p>
+
+  <div class="plot" id="quizPlot">
+    <div class="progress-row">
+      <span id="progLabel">Q.01 / 06</span>
+      <div class="progress-track"><div class="progress-fill" id="progFill"></div></div>
+      <span>plot in progress</span>
+    </div>
+    <div id="questionArea"></div>
+    <div class="error-msg" id="errorMsg">Pick an option to continue.</div>
+    <div class="foot-nav">
+      <button class="btn btn-ghost" id="backBtn" style="visibility:hidden;">Back</button>
+      <button class="btn" id="nextBtn">Next</button>
+    </div>
+  </div>
+
+  <div class="brand-foot">Team Rajpal · Seaton, Pickering, Ontario</div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "Who's this home for?",
+    opts: [
+      { text: "Just the two of us", scores: {S:2, T:1} },
+      { text: "A growing family", scores: {D:2, S:1} },
+      { text: "Multi-generational, extended family under one roof", scores: {D:3} },
+      { text: "It's purely an investment, I won't live there", scores: {I:3} }
+    ]
+  },
+  {
+    q: "What's your comfortable budget range?",
+    opts: [
+      { text: "$600K to $700K", resultKey: "A" },
+      { text: "$700K to $800K", resultKey: "B" },
+      { text: "$800K to $900K", resultKey: "C" },
+      { text: "$900K to $1M", resultKey: "D" },
+      { text: "$1M+", resultKey: "E" }
+    ]
+  },
+  {
+    q: "How do you get to work most days?",
+    opts: [
+      { text: "GO train or a regular commute into Toronto", scores: {T:2, S:1} },
+      { text: "Mostly local, occasional trips into the city", scores: {S:2, D:1} },
+      { text: "I work from home or locally, full time", scores: {D:2} },
+      { text: "Not applicable, this isn't where I'll live", scores: {I:3} }
+    ]
+  },
+  {
+    q: "How important is a backyard?",
+    opts: [
+      { text: "Must have real yard space", scores: {D:3} },
+      { text: "A modest yard is fine, I'd rather have more house", scores: {S:2, T:1} },
+      { text: "Doesn't matter much to me", scores: {T:2, I:1} },
+      { text: "Not applicable", scores: {I:3} }
+    ]
+  },
+  {
+    q: "What's your timeline?",
+    opts: [
+      { text: "Ready to move within the year", scores: {T:1, S:1} },
+      { text: "Comfortable waiting until 2027 for a pre-con build", scores: {S:2, D:2} },
+      { text: "This is a five-plus year investment play", scores: {I:3} },
+      { text: "Just exploring my options for now", scores: {T:1} }
+    ]
+  },
+  {
+    q: "Have you had a mortgage pre-approval?",
+    opts: [
+      { text: "Yes" },
+      { text: "No" }
+    ]
+  },
+  {
+    q: "How much are you pre-approved for?",
+    type: "text",
+    placeholder: "e.g. $750,000",
+    showIf: { questionIndex: 5, optionIndex: 0 }
+  },
+  {
+    q: "Are you signed up or working with an agent?",
+    opts: [
+      { text: "Yes" },
+      { text: "No" }
+    ]
+  }
+];
+
+const results = {
+  A: {
+    tag: "3-storey townhouse",
+    title: "Smart entry point, serious upside.",
+    body: "A 3-storey townhouse gets you into a master-planned community at the most efficient price point, more square footage stacked vertically, low-maintenance living, and a clear path to build equity in North Pickering.",
+    note: "Entry-level product like this in Seaton tends to move fastest once it's released.",
+    icon: iconTown
+  },
+  B: {
+    tag: "2-storey townhouse with a backyard",
+    title: "Room to breathe, without stretching.",
+    body: "A 2-storey townhouse with a backyard adds real outdoor space to the efficiency of a townhouse, ideal if you want room for kids or pets to play without taking on a detached-home price tag.",
+    note: "This is one of the more requested product types in North Pickering right now, it balances space and price well.",
+    icon: iconTown
+  },
+  C: {
+    tag: "Semi-detached",
+    title: "The best of both worlds.",
+    body: "Semi-detached gives you meaningfully more space and privacy than a townhouse, with only one shared wall, at a price point still well below detached.",
+    note: "Semis in North Pickering tend to hold their value well since they appeal to both end-users and move-up buyers.",
+    icon: iconSemi
+  },
+  D: {
+    tag: "Detached with a 1-car garage",
+    title: "Your own four walls, no compromises on privacy.",
+    body: "A detached home with a single-car garage gives you full privacy and a real yard, at a price point that's still attainable in North Pickering's low-rise product.",
+    note: "This is where a lot of growing families land, enough space without maxing out the budget.",
+    icon: iconDetached
+  },
+  E: {
+    tag: "Detached with a 2-car garage",
+    title: "Room for everything, including the long game.",
+    body: "A 2-car garage detached home sits at the top of the low-rise product ladder, maximum space, storage, and privacy, plus the strongest long-term land value.",
+    note: "As Seaton's later phases release, this product is getting scarcer. Worth acting earlier rather than later.",
+    icon: iconDetached
+  }
+};
+
+function iconDetached(){
+  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="30" width="44" height="26" stroke="#16232E" stroke-width="1.5"/><path d="M6 30L32 12L58 30" stroke="#B9832E" stroke-width="1.5" fill="none"/><rect x="28" y="40" width="8" height="16" stroke="#16232E" stroke-width="1.5"/><rect x="16" y="36" width="7" height="7" stroke="#16232E" stroke-width="1.2"/><rect x="41" y="36" width="7" height="7" stroke="#16232E" stroke-width="1.2"/></svg>';
+}
+function iconSemi(){
+  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="30" width="26" height="26" stroke="#16232E" stroke-width="1.5"/><rect x="32" y="30" width="26" height="26" stroke="#16232E" stroke-width="1.5"/><path d="M2 30L19 16L36 30" stroke="#B9832E" stroke-width="1.5" fill="none"/><path d="M28 30L45 16L62 30" stroke="#B9832E" stroke-width="1.5" fill="none"/><rect x="14" y="42" width="6" height="14" stroke="#16232E" stroke-width="1.2"/><rect x="44" y="42" width="6" height="14" stroke="#16232E" stroke-width="1.2"/></svg>';
+}
+function iconTown(){
+  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="30" width="18" height="26" stroke="#16232E" stroke-width="1.5"/><rect x="23" y="30" width="18" height="26" stroke="#16232E" stroke-width="1.5"/><rect x="42" y="30" width="18" height="26" stroke="#16232E" stroke-width="1.5"/><path d="M0 30L13 18L26 30" stroke="#B9832E" stroke-width="1.4" fill="none"/><path d="M19 30L32 18L45 30" stroke="#B9832E" stroke-width="1.4" fill="none"/><path d="M38 30L51 18L64 30" stroke="#B9832E" stroke-width="1.4" fill="none"/></svg>';
+}
+function iconInvestor(){
+  return '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 48L22 34L32 42L56 16" stroke="#B9832E" stroke-width="2" fill="none"/><path d="M44 16H56V28" stroke="#B9832E" stroke-width="2" fill="none"/><line x1="8" y1="54" x2="58" y2="54" stroke="#16232E" stroke-width="1.5"/></svg>';
+}
+
+let current = 0;
+const answers = new Array(questions.length).fill(null);
+const urlParams = new URLSearchParams(window.location.search);
+const agentEmail = urlParams.get('agent') || 'info@teamrajpal.com';
+const agentName = urlParams.get('name') || 'the team';
+const plot = document.getElementById('quizPlot');
+const questionArea = document.getElementById('questionArea');
+const nextBtn = document.getElementById('nextBtn');
+const backBtn = document.getElementById('backBtn');
+const progLabel = document.getElementById('progLabel');
+const progFill = document.getElementById('progFill');
+const errorMsg = document.getElementById('errorMsg');
+
+function pad(n){ return n < 10 ? '0'+n : ''+n; }
+
+function shouldShowQuestion(idx){
+  const q = questions[idx];
+  if(!q.showIf) return true;
+  return answers[q.showIf.questionIndex] === q.showIf.optionIndex;
+}
+
+function visibleIndices(){
+  const list = [];
+  for(let i=0;i<questions.length;i++){
+    if(shouldShowQuestion(i)) list.push(i);
+  }
+  return list;
+}
+
+function nextVisibleIndex(fromIdx){
+  let idx = fromIdx + 1;
+  while(idx < questions.length && !shouldShowQuestion(idx)) idx++;
+  return idx;
+}
+
+function prevVisibleIndex(fromIdx){
+  let idx = fromIdx - 1;
+  while(idx >= 0 && !shouldShowQuestion(idx)) idx--;
+  return idx;
+}
+
+function renderTicks(){
+  progFill.innerHTML = '';
+  const vis = visibleIndices();
+  const pos = vis.indexOf(current);
+  vis.forEach((qi, i) => {
+    const t = document.createElement('div');
+    t.className = 'tick';
+    t.style.opacity = i <= pos ? '1' : '0.25';
+    progFill.appendChild(t);
+  });
+}
+
+function renderQuestion(){
+  errorMsg.style.display = 'none';
+  const item = questions[current];
+  const vis = visibleIndices();
+  const pos = vis.indexOf(current) + 1;
+  progLabel.textContent = 'Q.' + pad(pos) + ' / ' + pad(vis.length);
+  renderTicks();
+  let html = '<div class="q-num">Question ' + pos + '</div>';
+  html += '<div class="q-text">' + item.q + '</div>';
+
+  if(item.type === 'text'){
+    const val = typeof answers[current] === 'string' ? answers[current] : '';
+    html += '<input type="text" id="textAnswer" placeholder="' + (item.placeholder || '') + '" value="' + val.replace(/"/g,'&quot;') + '" style="width:100%;font-family:\'Inter\',sans-serif;font-size:15px;padding:13px 16px;border:1px solid var(--hairline);border-radius:2px;background:var(--card);color:var(--ink);">';
+    questionArea.innerHTML = html;
+    const input = document.getElementById('textAnswer');
+    input.addEventListener('input', () => {
+      answers[current] = input.value;
+      errorMsg.style.display = 'none';
+    });
+    setTimeout(() => input.focus(), 0);
+  } else {
+    html += '<div class="options">';
+    item.opts.forEach((opt, idx) => {
+      const sel = answers[current] === idx ? ' selected' : '';
+      html += '<button class="opt' + sel + '" data-idx="' + idx + '"><span class="opt-mark">' + String.fromCharCode(65+idx) + '</span><span>' + opt.text + '</span></button>';
+    });
+    html += '</div>';
+    questionArea.innerHTML = html;
+
+    questionArea.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        answers[current] = parseInt(btn.getAttribute('data-idx'), 10);
+        errorMsg.style.display = 'none';
+        renderQuestion();
+      });
+    });
+  }
+
+  backBtn.style.visibility = prevVisibleIndex(current) < 0 ? 'hidden' : 'visible';
+  nextBtn.textContent = nextVisibleIndex(current) >= questions.length ? 'See my result' : 'Next';
+}
+
+function tally(){
+  const budgetAnswerIdx = answers[1];
+  return questions[1].opts[budgetAnswerIdx].resultKey;
+}
+
+function renderResult(){
+  const key = tally();
+  const r = results[key];
+  let html = '<div class="result-tag">Your match</div>';
+  html += '<div class="result-head"><div class="result-icon">' + r.icon() + '</div><h2 class="result-title">' + r.title + '</h2></div>';
+  html += '<p class="result-body">' + r.body + '</p>';
+  html += '<p class="result-note">' + r.note + '</p>';
+  const subject = encodeURIComponent("My North Pickering home match: " + r.tag);
+  let bodyText = "Hi " + agentName + ",\n\nI just took the Team Rajpal home-fit quiz and matched with: " + r.tag + ".\n\nHere are my answers:\n\n";
+  const vis = visibleIndices();
+  vis.forEach((qi, i) => {
+    const item = questions[qi];
+    const ansVal = answers[qi];
+    let ansText;
+    if(item.type === 'text'){
+      ansText = ansVal && ansVal.trim() ? ansVal.trim() : "(not answered)";
+    } else {
+      ansText = ansVal !== null ? item.opts[ansVal].text : "(skipped)";
+    }
+    bodyText += (i + 1) + ". " + item.q + "\n   " + ansText + "\n\n";
+  });
+  bodyText += "I'd like to talk about what's currently available.\n\n";
+  const body = encodeURIComponent(bodyText);
+  html += '<div class="cta-row">';
+  html += '<a class="btn" style="text-decoration:none;display:inline-block;" href="mailto:' + encodeURIComponent(agentEmail) + '?subject=' + subject + '&body=' + body + '">Email me my match</a>';
+  html += '<button class="btn btn-ghost" id="restartBtn">Retake quiz</button>';
+  html += '</div>';
+  questionArea.innerHTML = html;
+  document.getElementById('progLabel').textContent = 'Result';
+  progFill.innerHTML = '';
+  document.querySelector('.progress-row').style.display = 'none';
+  document.querySelector('.foot-nav').style.display = 'none';
+
+  document.getElementById('restartBtn').addEventListener('click', () => {
+    current = 0;
+    answers.fill(null);
+    document.querySelector('.progress-row').style.display = 'flex';
+    document.querySelector('.foot-nav').style.display = 'flex';
+    renderQuestion();
+  });
+}
+
+nextBtn.addEventListener('click', () => {
+  const item = questions[current];
+  const ans = answers[current];
+  const isEmpty = item.type === 'text' ? !(ans && ans.trim()) : ans === null;
+  if(isEmpty){
+    errorMsg.textContent = item.type === 'text' ? 'Enter an amount to continue.' : 'Pick an option to continue.';
+    errorMsg.style.display = 'block';
+    return;
+  }
+  const next = nextVisibleIndex(current);
+  if(next >= questions.length){
+    renderResult();
+  } else {
+    current = next;
+    renderQuestion();
+  }
+});
+
+backBtn.addEventListener('click', () => {
+  const prev = prevVisibleIndex(current);
+  if(prev >= 0){
+    current = prev;
+    renderQuestion();
+  }
+});
+
+renderQuestion();
+</script>
+</body>
+</html>
